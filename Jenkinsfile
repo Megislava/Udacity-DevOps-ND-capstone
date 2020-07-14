@@ -15,7 +15,9 @@ pipeline {
 
         stage('docker') {
             steps {
-                sh "docker build ."
+                withCredentials([usernamePassword(credentialsId: 'docker_id', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]) {
+                    sh "docker build . -t"
+                }
             }
         }
 
