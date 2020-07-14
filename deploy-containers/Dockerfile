@@ -1,12 +1,5 @@
-FROM ubuntu:latest
+FROM nginx
 
-WORKDIR /app
-
-RUN apt-get update -y &&\
-    apt-get install apache2 -y
+RUN rm /var/www/html/index.html
     
 COPY . index.html /var/www/html/
-
-EXPOSE 80
-
-CMD ["apachectl", "-D", "FOREGROUND"]
