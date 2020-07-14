@@ -15,7 +15,9 @@ pipeline {
 
         stage('docker') {
             steps {
-                sh "docker build ."
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker_id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
+                    sh "docker build -t megislava/capstone ."
+                }
             }
         }
 
@@ -23,8 +25,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker_id', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]) {
                   sh 'docker login -u=$DOCKER_REGISTRY_USER -p=$DOCKER_REGISTRY_PWD'
-                  sh 'docker tag index megislava/index:latest'
-                  sh "docker push megislava/index"
+                  sh 'docker tag index megislava/capstone:latest'
+                  sh "docker push megislava/capstone"
                 }
             } 
         }
