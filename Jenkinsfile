@@ -15,9 +15,7 @@ pipeline {
 
         stage('docker') {
             steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker_id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
-                    sh "docker build -t megislava/capstone ."
-                }
+                sh "docker build ."
             }
         }
 
