@@ -31,7 +31,7 @@ pipeline {
 
         stage('deploy') {
             steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                    sh './cloudformation/create.sh capstone-projekt cloudformation/infrastructure.yml cloudformation/params.json'
                 }
             }
