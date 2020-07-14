@@ -15,7 +15,7 @@ pipeline {
 
         stage('docker') {
             steps {
-                sh "docker build --tag=index ."
+                sh "docker build ."
             }
         }
 
